@@ -1,0 +1,23 @@
+﻿<Window x:Class="DemoUser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoUser"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="Red">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Image Source="Images/VHS.png" Margin="10,0"/>
+            <TextBlock Text="HELP 116 MED"
+                       FontFamily="Arial"
+                       FontSize="20"  VerticalAlignment="Center"/>
+        </StackPanel>
+        <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility="Hidden" Background="#FFFFF9F1"></Frame>
+    </Grid>
+</Window>

@@ -1,0 +1,114 @@
+﻿<Page x:Class="DemoUser.Pages.ClientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DemoUser.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClientPage"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <DockPanel >
+            <Label Content="Пол" HorizontalAlignment="Left"></Label>
+            <ComboBox Name="GenderSerch" Margin="5" MaxWidth="140" DisplayMemberPath="Name" SelectionChanged="GenderSerch_SelectionChanged"></ComboBox>
+            </DockPanel>
+            <DockPanel Grid.Column="1">
+                <Label Content="Фамилия" HorizontalAlignment="Left"></Label>
+                <TextBox Name="FirstnameSerch" Margin="5" MaxWidth="140" TextChanged="FirstnameSerch_TextChanged"></TextBox>
+            </DockPanel>
+            <DockPanel Grid.Column="2">
+                <Label Content="Имя" HorizontalAlignment="Left"></Label>
+                <TextBox Name="LastnameSerch" Margin="5" MaxWidth="140" TextChanged="LastnameSerch_TextChanged"></TextBox>
+            </DockPanel>
+            <DockPanel Grid.Column="3">
+                <Label Content="Отчество" HorizontalAlignment="Left"></Label>
+                <TextBox Name="PatronymicSerch" Margin="5" MaxWidth="140" TextChanged="PatronymicSerch_TextChanged"></TextBox>
+            </DockPanel>
+            <DockPanel Grid.Column="0" Grid.Row="1">
+                <Label Content="Email" HorizontalAlignment="Left"></Label>
+                <TextBox Name="EmailSerch" Margin="5" MaxWidth="140" TextChanged="EmailSerch_TextChanged"></TextBox>
+            </DockPanel>
+            <DockPanel Grid.Column="1" Grid.Row="1">
+                <Label Content="Nomber" HorizontalAlignment="Left"></Label>
+                <TextBox Name="NomberSerch" Margin="5" MaxWidth="140" TextChanged="NomberSerch_TextChanged"></TextBox>
+            </DockPanel>
+
+            <ComboBox SelectionChanged="CBItemsOnList_SelectionChanged" Margin="20,5" x:Name="CBItemsOnList" MinWidth="100" Grid.Row="3" Grid.Column="3" />
+        </Grid>
+        
+        <ScrollViewer Grid.Row="1">
+            <DataGrid x:Name="ClientDG" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Gender" Binding="{Binding GenderOfClient.NameOfGender}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Firstname" SortMemberPath="Firstname" Binding="{Binding Firstname}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Lastname" Binding="{Binding Lastname}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Patronymic" Binding="{Binding Patronymic}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="BirthDate" Binding="{Binding BirthDate, StringFormat=dd.MM.yyyy}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="PhoneNumber" Binding="{Binding PhoneNumber}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="AddedDate" Binding="{Binding AddedDate, StringFormat=dd.MM.yyyy}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="LastDate" Binding="{Binding LastVizit, StringFormat=dd.MM.yyyy}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="CountOfVizit" Binding="{Binding VisitsCount}"></DataGridTextColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListView ItemsSource="{Binding ClientTag}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Tag.Name}" Background="{Binding Tag.Color}"></Label>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+
+        <DockPanel Grid.Row="2"
+                   LastChildFill="False">
+            <Button DockPanel.Dock="Left"
+                    x:Name="BPrev"
+                    Content="&lt;"
+                    Margin="5"
+                    VerticalAlignment="Center"
+                    Click="BPrev_Click" />
+            <Button DockPanel.Dock="Left" x:Name="BNext" Content="&gt;" Margin="5" VerticalAlignment="Center" Click="BNext_Click" />
+            <TextBlock DockPanel.Dock="Right" x:Name="TCount" Margin="5" Text="10/10"/>
+        </DockPanel>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="AddB" Content="Добавить" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="40" Click="AddB_Click"></Button>
+            <Button x:Name="DeleteB" Content="Удалить" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="40" Grid.Column="1" Click="DeleteB_Click"></Button>
+            <Button x:Name="ChangeB" Content="Редактировать" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="100" Height="40" Click="ChangeB_Click"></Button>
+        </Grid>
+    </Grid>
+</Page>

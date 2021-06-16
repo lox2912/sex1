@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DemoUserModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DemoUserEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Client" EntityType="DemoUserModel.Client" />
+    <EntitySet Name="ClientTag" EntityType="DemoUserModel.ClientTag" />
+    <EntitySet Name="Gender" EntityType="DemoUserModel.Gender" />
+    <EntitySet Name="Tag" EntityType="DemoUserModel.Tag" />
+    <EntitySet Name="User" EntityType="DemoUserModel.User" />
+    <EntitySet Name="Visit" EntityType="DemoUserModel.Visit" />
+    <AssociationSet Name="FK_Client_Gender" Association="DemoUserModel.FK_Client_Gender">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClientTag_Client" Association="DemoUserModel.FK_ClientTag_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="ClientTag" EntitySet="ClientTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visit_Client" Association="DemoUserModel.FK_Visit_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Visit" EntitySet="Visit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClientTag_Tag" Association="DemoUserModel.FK_ClientTag_Tag">
+      <End Role="Tag" EntitySet="Tag" />
+      <End Role="ClientTag" EntitySet="ClientTag" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GenderId" Type="Int32" />
+    <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddedDate" Type="DateTime" Precision="0" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Gender" Relationship="DemoUserModel.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
+    <NavigationProperty Name="ClientTag" Relationship="DemoUserModel.FK_ClientTag_Client" FromRole="Client" ToRole="ClientTag" />
+    <NavigationProperty Name="Visit" Relationship="DemoUserModel.FK_Visit_Client" FromRole="Client" ToRole="Visit" />
+  </EntityType>
+  <EntityType Name="ClientTag">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="TagId" Type="Int32" Nullable="false" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="DemoUserModel.FK_ClientTag_Client" FromRole="ClientTag" ToRole="Client" />
+    <NavigationProperty Name="Tag" Relationship="DemoUserModel.FK_ClientTag_Tag" FromRole="ClientTag" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Client" Relationship="DemoUserModel.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Color" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientTag" Relationship="DemoUserModel.FK_ClientTag_Tag" FromRole="Tag" ToRole="ClientTag" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Login" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Visit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Client" Relationship="DemoUserModel.FK_Visit_Client" FromRole="Visit" ToRole="Client" />
+  </EntityType>
+  <Association Name="FK_Client_Gender">
+    <End Type="DemoUserModel.Gender" Role="Gender" Multiplicity="0..1" />
+    <End Type="DemoUserModel.Client" Role="Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClientTag_Client">
+    <End Type="DemoUserModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="DemoUserModel.ClientTag" Role="ClientTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientTag">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Visit_Client">
+    <End Type="DemoUserModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="DemoUserModel.Visit" Role="Visit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Visit">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClientTag_Tag">
+    <End Type="DemoUserModel.Tag" Role="Tag" Multiplicity="1" />
+    <End Type="DemoUserModel.ClientTag" Role="ClientTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientTag">
+        <PropertyRef Name="TagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

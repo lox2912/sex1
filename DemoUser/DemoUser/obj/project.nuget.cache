@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "KcxcyN8aTYdht351ghbbxp6xU5ADfn0YZxCeurdfPpFByagG4T8kOt6Uw4QX8UKxoQ+qu78Wl13p6Lzo0lKI6Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\7even\\Desktop\\DemoUser\\DemoUser\\DemoUser.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\7even\\.nuget\\packages\\entityframework\\6.2.0\\entityframework.6.2.0.nupkg.sha512",
+    "C:\\Users\\7even\\.nuget\\packages\\entityframework.ru\\6.2.0\\entityframework.ru.6.2.0.nupkg.sha512",
+    "C:\\Users\\7even\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.7\\microsoft.aspnet.mvc.5.2.7.nupkg.sha512",
+    "C:\\Users\\7even\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.7\\microsoft.aspnet.razor.3.2.7.nupkg.sha512",
+    "C:\\Users\\7even\\.nuget\\packages\\microsoft.aspnet.webpages\\3.2.7\\microsoft.aspnet.webpages.3.2.7.nupkg.sha512",
+    "C:\\Users\\7even\\.nuget\\packages\\microsoft.web.infrastructure\\1.0.0\\microsoft.web.infrastructure.1.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
